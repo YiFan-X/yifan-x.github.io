@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>王一帆的博客</title>
+    <link>http://yifan-x.github.io/</link>
+    <description>Recent content on 王一帆的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 29 Mar 2019 20:20:02 +0800</lastBuildDate>
+    
+	<atom:link href="http://yifan-x.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Django中间件</title>
+      <link>http://yifan-x.github.io/post/django%E4%B8%AD%E9%97%B4%E4%BB%B6/</link>
+      <pubDate>Fri, 29 Mar 2019 20:20:02 +0800</pubDate>
+      
+      <guid>http://yifan-x.github.io/post/django%E4%B8%AD%E9%97%B4%E4%BB%B6/</guid>
+      <description>Django基础九：中间件
+一 ：引入 
+我们之前给视图函数加装饰器来判断是用户是否登录，把没有登录的用户请求跳转到登录页面。
+我们通过给几个特定视图函数加装饰器实现了这个需求。但是以后添加的视图函数可能也需要加上装饰器，这样是不是稍微有点繁琐。
+学习到中间件，我们就可以用更适宜的方式来实现类似给所有请求都做相同操作的功能了
+
+二： 中间件介绍 中间件顾名思义，是介于request与response处理之间的一道处理过程，相对比较轻量级，并且在全局上改变django的输入与输出。因为改变的是全局，所以需要谨慎实用，用不好会影响到性能。
+
+Django的中间件的定义：
+Middleware is a framework of hooks into Django’s request/response processing. &amp;lt;br&amp;gt;It’s a light, low-level “plugin” system for globally altering Django’s input or output.  如果你想修改请求，例如被传送到view中的**HttpRequest**对象。 或者你想修改view返回的**HttpResponse**对象，这些都可以通过中间件来实现。 可能你还想在view执行之前做一些操作，这种情况就可以用 middleware来实现。 说的直白一点中间件是帮助我们在视图函数执行之前和执行之后都可以做一些额外的操作，它本质上就是一个自定义类，类中定义了几个方法，Django框架会在请求的特定的时间去执行这些方法。 我们一直都在使用中间件，只是没有注意到而已，打开Django项目的Settings.py文件，看到下面的MIDDLEWARE配置项，django默认自带的一些中间件：  MIDDLEWARE = [ &#39;django.middleware.security.SecurityMiddleware&#39;, &#39;django.contrib.sessions.middleware.SessionMiddleware&#39;, &#39;django.middleware.common.CommonMiddleware&#39;, &#39;django.middleware.csrf.CsrfViewMiddleware&#39;, &#39;django.contrib.auth.middleware.AuthenticationMiddleware&#39;, &#39;django.contrib.messages.middleware.MessageMiddleware&#39;, &#39;django.middleware.clickjacking.XFrameOptionsMiddleware&#39;, ]  MIDDLEWARE配置项是一个列表，列表中是一个个字符串，这些字符串其实是一个个类，也就是一个个中间件。
+我们之前已经接触过一个csrf相关的中间件了？我们一开始让大家把他注释掉，再提交post请求的时候，就不会被forbidden了，后来学会使用csrf_token之后就不再注释这个中间件了。
+　那接下来就看一下中间件中的方法以及这些方法什么时候被执行。
+ 
+三 ：自定义中间件 3.1：自定义中间件介绍 想多了解中间，在开源中国中有很多关于中间件的详细解释
+中间件可以定义五个方法，分别是：（主要的是process_request和process_response） - process_request(self,request) - process_view(self, request, view_func, view_args, view_kwargs) - process_template_response(self,request,response) - process_exception(self, request, exception) - process_response(self, request, response) 以上方法的返回值可以是None或一个HttpResponse对象，如果是None，则继续按照django定义的规则向后继续执行，如果是HttpResponse对象，则直接将该对象返回给用户。 当用户发起请求的时候会依次经过所有的的中间件，这个时候的请求时process_request,最后到达views的函数中，views函数处理后，在依次穿过中间件，这个时候是process_response,最后返回给请求者。</description>
+    </item>
+    
+  </channel>
+</rss>
