@@ -91,6 +91,23 @@ Middleware is a framework of hooks into Django’s request/response processing. 
                             <p class="readmore"><a href="http://yifan-x.github.io/post/django%E4%B8%AD%E9%97%B4%E4%BB%B6/">阅读全文</a></p>
                         </article>
                     
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="http://yifan-x.github.io/post/django-form%E5%92%8Cmodelform%E7%BB%84%E4%BB%B6/" title="Form和ModelForm组件" >Form和ModelForm组件</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月29日
+                            </date>
+                            
+                            <div class="post-content">
+                                一： Form介绍 　我们之前在HTML页面中利用form表单向后端提交数据时，都会写一些获取用户输入的标签并且用form标签把它们包起来。 与此同时我们在好多场景下都需要对用户的输入做校验，比如校验用户是否输入，输入的长度和格式等正不正确。如果用户输入的内容有错误就需要在页面上相应的位置显示对应的错误信息。 Django form组件就实现了上面所述的功能。 总结一下，其实form组件的主要功能如下: 生成页面可用的HTML标签 对用户提交的数据进行校验 保留上次输入内容  
+1.1：普通方式手写注册功能 views.py # 注册 def register(request): error_msg = &quot;&quot; if request.method == &quot;POST&quot;: username = request.POST.get(&quot;name&quot;) pwd = request.POST.get(&quot;pwd&quot;) # 对注册信息做校验 if len(username) &lt; 6: # 用户长度小于6位 error_msg = &quot;用户名长度不能小于6位&quot; else: # 将用户名和密码存到数据库 return HttpResponse(&quot;注册成功&quot;) return render(request, &quot;register.html&quot;, {&quot;error_msg&quot;: error_msg})  login.html &lt;!DOCTYPE html&gt; &lt;html lang=&quot;en&quot;&gt; &lt;head&gt; &lt;meta charset=&quot;UTF-8&quot;&gt; &lt;title&gt;注册页面&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;form action=&quot;/reg/&quot; method=&quot;post&quot;&gt; {% csrf_token %} &lt;p&gt; 用户名: &lt;input type=&quot;text&quot; name=&quot;name&quot;&gt; &lt;/p&gt; &lt;p&gt; 密码： &lt;input type=&quot;password&quot; name=&quot;pwd&quot;&gt; &lt;/p&gt; &lt;p&gt; &lt;input type=&quot;submit&quot; value=&quot;注册&quot;&gt; &lt;p style=&quot;color: red&quot;&gt;{{ error_msg }}&lt;/p&gt; &lt;/p&gt; &lt;/form&gt; &lt;/body&gt; &lt;/html&gt;……
+                            </div>
+                            <p class="readmore"><a href="http://yifan-x.github.io/post/django-form%E5%92%8Cmodelform%E7%BB%84%E4%BB%B6/">阅读全文</a></p>
+                        </article>
+                    
                     
 
 
@@ -116,6 +133,10 @@ Middleware is a framework of hooks into Django’s request/response processing. 
     
     <li>
         <a href="http://yifan-x.github.io/post/django%E4%B8%AD%E9%97%B4%E4%BB%B6/" title="Django中间件">Django中间件</a>
+    </li>
+    
+    <li>
+        <a href="http://yifan-x.github.io/post/django-form%E5%92%8Cmodelform%E7%BB%84%E4%BB%B6/" title="Form和ModelForm组件">Form和ModelForm组件</a>
     </li>
     
 </ul>
